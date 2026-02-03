@@ -337,7 +337,23 @@ class AWSCaseManagerApp:
 
 def main(page: ft.Page):
     """Main entry point."""
-    app = AWSCaseManagerApp(page)
+    try:
+        app = AWSCaseManagerApp(page)
+    except Exception as e:
+        import traceback
+        error_text = traceback.format_exc()
+        page.add(
+            ft.Container(
+                content=ft.Column([
+                    ft.Text("启动错误", size=24, color=ft.Colors.RED),
+                    ft.Text(str(e), selectable=True),
+                    ft.Text(error_text, size=10, selectable=True),
+                ], scroll=ft.ScrollMode.AUTO),
+                padding=20,
+                expand=True,
+            )
+        )
+        page.update()
 
 
 if __name__ == "__main__":

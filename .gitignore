@@ -29,6 +29,18 @@ htmlcov/
 
 # Flet
 .flet/
+.flet_build/
+
+# Flutter/Android build
+android/
+ios/
+macos/
+linux/
+windows/
+web/
+*.apk
+*.aab
+*.ipa
 
 # Local data
 *.db
@@ -40,3 +52,9 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Secrets (never commit these)
+.env
+.env.local
+*.pem
+*.key

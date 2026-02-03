@@ -33,8 +33,8 @@ class AWSCaseManagerApp:
         self.page.padding = 0
         self.page.bgcolor = ft.Colors.GREY_100
         
-        # Initialize services
-        self.auth_service = AuthService()
+        # Initialize services (pass page for client_storage)
+        self.auth_service = AuthService(page)
         self.aws_client: AWSClientService | None = None
         self.cache_service = CacheService()
         self.archive_service = ArchiveService()

@@ -29,6 +29,10 @@ class AWSCaseManagerApp:
         self.page.title = "AWS Case Manager"
         self.page.theme_mode = ft.ThemeMode.LIGHT
         
+        # 页面设置
+        self.page.padding = 0
+        self.page.bgcolor = ft.Colors.GREY_100
+        
         # Initialize services
         self.auth_service = AuthService()
         self.aws_client: AWSClientService | None = None

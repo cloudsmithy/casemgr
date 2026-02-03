@@ -66,32 +66,94 @@ class AuthPage(ft.View):
 
     def _build_view(self):
         self.appbar = ft.AppBar(
-            title=ft.Text("AWS 凭证配置"),
+            title=ft.Text("AWS 凭证配置", weight=ft.FontWeight.W_500),
             center_title=True,
+            bgcolor=ft.Colors.ORANGE_700,
+            color=ft.Colors.WHITE,
+        )
+        
+        # AWS Logo placeholder
+        aws_logo = ft.Container(
+            content=ft.Row(
+                controls=[
+                    ft.Icon(ft.Icons.CLOUD, size=48, color=ft.Colors.ORANGE_700),
+                    ft.Text("AWS", size=32, weight=ft.FontWeight.BOLD, color=ft.Colors.ORANGE_700),
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+            ),
+            margin=ft.Margin(0, 0, 0, 20),
+        )
+        
+        # Card for manual input
+        manual_card = ft.Card(
+            content=ft.Container(
+                content=ft.Column(
+                    controls=[
+                        ft.Text("方式一：手动输入凭证", size=18, weight=ft.FontWeight.W_500),
+                        ft.Divider(height=1),
+                        self.access_key_field,
+                        self.secret_key_field,
+                        self.region_dropdown,
+                        ft.Button(
+                            "验证并保存",
+                            icon=ft.Icons.CHECK,
+                            style=ft.ButtonStyle(bgcolor=ft.Colors.ORANGE_700, color=ft.Colors.WHITE),
+                            on_click=self._on_manual_submit,
+                        ),
+                    ],
+                    spacing=16,
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                ),
+                padding=24,
+            ),
+            elevation=2,
+        )
+        
+        # Card for profile selection
+        profile_card = ft.Card(
+            content=ft.Container(
+                content=ft.Column(
+                    controls=[
+                        ft.Text("方式二：使用 AWS Profile", size=18, weight=ft.FontWeight.W_500),
+                        ft.Divider(height=1),
+                        ft.Text("从本地 ~/.aws/credentials 读取", size=12, color=ft.Colors.GREY_600),
+                        self.profile_dropdown,
+                        ft.Button(
+                            "使用此 Profile",
+                            icon=ft.Icons.LOGIN,
+                            style=ft.ButtonStyle(bgcolor=ft.Colors.BLUE_700, color=ft.Colors.WHITE),
+                            on_click=self._on_profile_submit,
+                        ),
+                    ],
+                    spacing=16,
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                ),
+                padding=24,
+            ),
+            elevation=2,
         )
         
         self.controls = [
             ft.Container(
                 content=ft.Column(
                     controls=[
-                        ft.Text("配置 AWS 凭证", size=24, weight=ft.FontWeight.BOLD),
-                        ft.Text("方式一：手动输入", size=16, color=ft.Colors.GREY_700),
-                        self.access_key_field,
-                        self.secret_key_field,
-                        self.region_dropdown,
-                        ft.TextButton(content=ft.Text("验证并保存"), on_click=self._on_manual_submit),
-                        ft.Divider(),
-                        ft.Text("方式二：使用 AWS Profile", size=16, color=ft.Colors.GREY_700),
-                        self.profile_dropdown,
-                        ft.TextButton(content=ft.Text("使用此 Profile"), on_click=self._on_profile_submit),
+                        aws_logo,
+                        ft.Text("AWS Case Manager", size=28, weight=ft.FontWeight.BOLD),
+                        ft.Text("管理您的 AWS Support 案例", size=14, color=ft.Colors.GREY_600),
+                        ft.Container(height=20),
+                        manual_card,
+                        ft.Container(height=10),
+                        profile_card,
+                        ft.Container(height=20),
                         self.loading,
                         self.status_text,
                     ],
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                    spacing=10,
+                    scroll=ft.ScrollMode.AUTO,
                 ),
                 padding=40,
                 expand=True,
+                alignment=ft.Alignment(0, 0),
             ),
         ]
 

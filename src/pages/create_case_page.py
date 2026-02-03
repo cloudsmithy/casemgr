@@ -37,8 +37,10 @@ class CreateCasePage(ft.View):
         # App bar
         appbar = ft.AppBar(
             leading=back_button,
-            title=ft.Text("创建新案例"),
+            title=ft.Text("创建新案例", weight=ft.FontWeight.W_500),
             center_title=False,
+            bgcolor=ft.Colors.ORANGE_700,
+            color=ft.Colors.WHITE,
         )
 
         # Service dropdown
@@ -187,7 +189,7 @@ class CreateCasePage(ft.View):
 
     def _handle_service_change(self, e):
         """Handle service selection change."""
-        service_code = e.control.value
+        service_code = self._service_dropdown.value
         self._selected_service = next(
             (s for s in self._services if s.code == service_code),
             None

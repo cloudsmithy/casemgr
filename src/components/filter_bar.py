@@ -69,6 +69,7 @@ class FilterBar(ft.Row):
         self._archive_checkbox = ft.Checkbox(
             label="显示已归档",
             value=self._filters.include_archived,
+            on_change=self._handle_archive_click,
         )
 
         # Clear button
@@ -104,7 +105,7 @@ class FilterBar(ft.Row):
 
     def _handle_status_change(self, e):
         """Handle status dropdown change."""
-        value = e.control.value
+        value = self._status_dropdown.value
         if value == "all":
             self._filters.status = None
         else:
@@ -113,7 +114,7 @@ class FilterBar(ft.Row):
 
     def _handle_severity_change(self, e):
         """Handle severity dropdown change."""
-        value = e.control.value
+        value = self._severity_dropdown.value
         if value == "all":
             self._filters.severity = None
         else:

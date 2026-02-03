@@ -82,8 +82,10 @@ class CaseListPage(ft.View):
 
         # App bar
         appbar = ft.AppBar(
-            title=ft.Text("AWS Case Manager"),
+            title=ft.Text("AWS Case Manager", weight=ft.FontWeight.W_500),
             center_title=False,
+            bgcolor=ft.Colors.ORANGE_700,
+            color=ft.Colors.WHITE,
             actions=[
                 self._offline_indicator,
                 refresh_button,

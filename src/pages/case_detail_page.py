@@ -79,8 +79,11 @@ class CaseDetailPage(ft.View):
                 case_detail.subject if case_detail else "案例详情",
                 max_lines=1,
                 overflow=ft.TextOverflow.ELLIPSIS,
+                weight=ft.FontWeight.W_500,
             ),
             center_title=False,
+            bgcolor=ft.Colors.ORANGE_700,
+            color=ft.Colors.WHITE,
             actions=actions,
         )
 

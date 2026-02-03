@@ -33,8 +33,10 @@ class ArchivedCasesPage(ft.View):
         # App bar
         appbar = ft.AppBar(
             leading=back_button,
-            title=ft.Text("已归档案例"),
+            title=ft.Text("已归档案例", weight=ft.FontWeight.W_500),
             center_title=False,
+            bgcolor=ft.Colors.ORANGE_700,
+            color=ft.Colors.WHITE,
         )
 
         # Case list

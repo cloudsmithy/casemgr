@@ -20,25 +20,29 @@ jobs:
         with:
           python-version: '3.11'
       
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - name: Setup Java
+        uses: actions/setup-java@v4
         with:
-          flutter-version: '3.24.0'
-          channel: 'stable'
+          distribution: 'temurin'
+          java-version: '17'
       
       - name: Install Flet
-        run: pip install flet
+        run: pip install flet>=0.80.0
       
       - name: Build APK
         run: |
-          flet build apk src/main.py \
+          cd src
+          flet build apk \
             --project aws-case-manager \
             --org com.aws.casemanager \
-            --product "AWS Case Manager"
+            --product "AWS Case Manager" \
+            --yes
+        env:
+          FLET_FLUTTER_AUTO_INSTALL: "true"
       
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: aws-case-manager-apk
-          path: build/apk/*.apk
+          path: src/build/apk/*.apk
           retention-days: 30
